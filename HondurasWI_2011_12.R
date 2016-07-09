@@ -1,3 +1,18 @@
+#Check for packages and install if necessary
+pkgTest <- function(x)
+{
+  if (!require(x,character.only = TRUE))
+  {
+    install.packages(x,dep=TRUE)
+    if(!require(x,character.only = TRUE)) stop("Package not found")
+  }
+}
+
+pkgTest("xlsx")
+pkgTest("gtools")
+pkgTest("plyr")
+pkgTest("dplyr")
+
 library(xlsx)
 library(gtools)
 library(plyr)
