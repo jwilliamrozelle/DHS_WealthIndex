@@ -17,3 +17,5 @@ At this time, the survey only calculates scores for rural areas of Honduras. In 
 * After finding it, the code will run.
 * Within R, descriptive statistics for the wealth index will be created, along with a histogram.
 * When R has finished, it will present another dialogue box, this time, you must navigate to where you want to save the output excel file. It will contain the Household ID Rural (or urban, eventually) score, the Combined score, and the quintile.
+
+###If you have any issues or questions, please feel free to message me.
