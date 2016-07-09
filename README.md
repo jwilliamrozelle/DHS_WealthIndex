@@ -1,5 +1,13 @@
 #DHS Wealth Index for Honduras for XLS Form (ODK Collect) and associated code for R
 
+This program was intended to facilitate easy use of the DHS Wealth Index. An ODK collect form has been created, which you can upload directly to your server, ona.io account or other hosting service. Included is a sample informed consent, and some other variables that I have found useful, such as interviewer name, geolocation, and a few more. These can be edited in the xls form, or ignored.
+
+The wealth index survey is written in both English and Spanish for use in the field. I designed the code so that the xlsx form downloaded from Ona.io could be read directly into R- zero experience with R necessary. If anyone finds it necessary, I'll add step by step instructions to upload it to Ona.io, but I assume any audience that may exist for this would already have that knowledge.
+
+At this time, I've only coded for Honduras and specificually the rural areas. As I work in different places or if there is any interest in this project, I'll add more countries.
+
+The quintiles and scores produced be comparable to the national index, say for a local area survey, or for users of services. In other words, they will not be quintiles within your sample, but rather quintiles that match the national ones when this DHS survey was conducted.
+
 ##Differences from the DHS index
 * This version uses the same number for usual residents, total persons in household and the number who slept in HH last night. The official DHS separates in the questionnaire.
 * This version does not include the LAND variable, which has a **very** minor impact. The DHS instructions note that not including this will have little effect on the finding in the end. Ultimately, it simply would have added too much to the survey itself.
