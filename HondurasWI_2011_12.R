@@ -322,22 +322,22 @@ trans(MyDataWV, cookoth, -0.00322463811976166, 2.60072434854557E-07)
 MyDataWV$landarea <- ((MyDataWV$landarea - 2.34019535650325)/9.10132613052762) * 0.0055605909173712
 
 #Calculate Rural Index
-MyDataWV <- mutate(MyDataWV, Rural = QH131A+QH131B+QH131C+QH131D+QH131E+QH131F+QH131G+QH131H+QH131I+QH131J+QH131K+QH131L+QH139+QH139A+QH139B+QH139C+QH141A+QH141B+QH141C+QH141D+QH141E+QH141F+QH142+QH144+QH145A+QH145B+QH145C+QH145D+QH145E+QH145F+QH145G+QH146+DOMESTIC+HOUSE+memsleep+h2oires+h2oyrd+h2opires+h2opyrd+h2opub+h2obwell+h2opwell+h2opspg+h2orain+h2otruck+h2osurf+h2obot+h2ooth+flushs+flusht+flushe+latvip+latcomp+latpit+lathang+flushhang+latbush+latoth+latshare+sflushs+sflusht+sflushhang+sflushe+slatvip+slatpit+slatcomp+slathang+slatoth+dirtfloo+woodfloo+cemtfloo+adobfloo+embfloo+prqfloo+mosfloo+granfloo+tilefloo+othfloo+noroof+natroof+wproof+cardroof+tinroof+cmtroof+calroof+cerroof+ctroof+othroof+nowall+natwall+bambwall+stomwall+adobwall+rwoodwall+bajawall+cardwall+cmtbwall+woodwall+stonwall+brkwall+prefwall+othwall+cookelec+cooklpg+cookkero+cookchar+cookwood+cooknone+cookoth+landarea)
-summary(MyDataWV$Rural)
+MyDataWV <- mutate(MyDataWV, RUR1 = QH131A+QH131B+QH131C+QH131D+QH131E+QH131F+QH131G+QH131H+QH131I+QH131J+QH131K+QH131L+QH139+QH139A+QH139B+QH139C+QH141A+QH141B+QH141C+QH141D+QH141E+QH141F+QH142+QH144+QH145A+QH145B+QH145C+QH145D+QH145E+QH145F+QH145G+QH146+DOMESTIC+HOUSE+memsleep+h2oires+h2oyrd+h2opires+h2opyrd+h2opub+h2obwell+h2opwell+h2opspg+h2orain+h2otruck+h2osurf+h2obot+h2ooth+flushs+flusht+flushe+latvip+latcomp+latpit+lathang+flushhang+latbush+latoth+latshare+sflushs+sflusht+sflushhang+sflushe+slatvip+slatpit+slatcomp+slathang+slatoth+dirtfloo+woodfloo+cemtfloo+adobfloo+embfloo+prqfloo+mosfloo+granfloo+tilefloo+othfloo+noroof+natroof+wproof+cardroof+tinroof+cmtroof+calroof+cerroof+ctroof+othroof+nowall+natwall+bambwall+stomwall+adobwall+rwoodwall+bajawall+cardwall+cmtbwall+woodwall+stonwall+brkwall+prefwall+othwall+cookelec+cooklpg+cookkero+cookchar+cookwood+cooknone+cookoth+landarea)
+summary(MyDataWV$RUR1)
 
 
 #Calculate Combined Index
-MyDataWV$Combined <- (-0.533 + 0.744 * MyDataWV$Rural)
-summary(MyDataWV$Combined)
-hist(MyDataWV$Combined, main = "Histogram of Wealth Index", xlab = "Combined score")
+MyDataWV$combscor <- (-0.533 + 0.744 * MyDataWV$RUR1)
+summary(MyDataWV$combscor)
+hist(MyDataWV$combscor, main = "Histogram of Wealth Index", xlab = "Combined score")
 
 #Quintiles
-MyDataWV$Quintile <- ifelse(MyDataWV$Combined <= -.9165920 & !is.na(MyDataWV$Combined), 5, ifelse(MyDataWV$Combined > -.9165920 & MyDataWV$Combined <= -.3085255, 4, ifelse(MyDataWV$Combined > -.3085255 & MyDataWV$Combined <= .4736003, 3, ifelse(MyDataWV$Combined > .4736003 & MyDataWV$Combined <= 1.1760208, 2, ifelse(MyDataWV$Combined > 1.1760208 & !is.na(MyDataWV$Combined), 1, NA)))))
+MyDataWV$Quintile <- ifelse(MyDataWV$combscor <= -.9165920 & !is.na(MyDataWV$combscor), 5, ifelse(MyDataWV$combscor > -.9165920 & MyDataWV$combscor <= -.3085255, 4, ifelse(MyDataWV$combscor > -.3085255 & MyDataWV$combscor <= .4736003, 3, ifelse(MyDataWV$combscor > .4736003 & MyDataWV$combscor <= 1.1760208, 2, ifelse(MyDataWV$combscor > 1.1760208 & !is.na(MyDataWV$combscor), 1, NA)))))
 
 table(MyDataWV$Quintile, useNA="always")
 
 #Output Dataset
-WealthIndex <- select(MyDataWV, HH_ID, Rural, Combined, Quintile)
+WealthIndex <- select(MyDataWV, HH_ID, RUR1, combscor, Quintile)
 
 #Save to xlsx
 write.xlsx(WealthIndex,file=file.choose())
